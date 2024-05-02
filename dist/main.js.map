@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":"yBAA0BA,QAAQC,IAAI,gB","sources":["webpack://spaceshootoutjs/./src/scripts/example.js"],"sourcesContent":["export default function(){console.log(\"Hello Brother\")}\n"],"names":["console","log"],"sourceRoot":""}
