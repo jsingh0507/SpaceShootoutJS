@@ -1,9 +1,15 @@
 import Player from "./scripts/player.js";
 window.Player = Player;
 const canvas = document.getElementById("game-canvas")
-const player = new Player(canvas,"./ship.png",0,0,50,50);
+const player = new Player(canvas,"./src/icons/ship1.png",350,625,80,60);
 // debugger
-player.draw();
-console.log(player)
+
+function animate(){
+    requestAnimationFrame(animate);
+    player.draw();
+}
+
+animate()
+// console.log(player)
 
 
