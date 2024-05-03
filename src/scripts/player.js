@@ -26,16 +26,17 @@ export default class Player {
     }
 
     updatePos(){
-        if(this.keys['a']){
+        //this function will basically check if the keys is true(from the eventListener) then increase the speed 
+        if(this.keys['a'] && this.x>=0){
             this.x -= this.speed;
         }
-        if(this.keys['d']){
+        if(this.keys['d'] && (this.x+this.width<=this.canvas.width) ){
             this.x += this.speed;
         }
-        if(this.keys['w']){
+        if(this.keys['w'] && this.y>=0){
             this.y -= this.speed;
         }
-        if(this.keys['s']){
+        if(this.keys['s'] && (this.y+this.height<=this.canvas.height)){
             this.y += this.speed;
         }
     }
