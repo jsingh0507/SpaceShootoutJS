@@ -9,5 +9,19 @@ body {
 
 #game-canvas {
     background-color: black;
-    margin-top: 20px; 
+    // margin-top: 5px; 
+}
+
+#main-element{
+    display:flex;
+    align-items: center;
+}
+
+#sidebar {
+    display: flex;
+    width: 200px;
+    height: 600px;
+    flex-direction: column;
+    align-self: flex-start;
+    background-color: darkgray;
 }
