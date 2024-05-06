@@ -8,6 +8,7 @@ export default class Player {
         this.icon = new Image();
         this.icon.src = shipSrc;
         this.ctx = this.canvas.getContext('2d');
+        this.radius = 5;
         
         // variables to keep track of the keyboard entry of the user:
         this.keys = {};
@@ -47,5 +48,16 @@ export default class Player {
         this.updatePos();
         this.ctx.drawImage(this.icon, this.x, this.y, this.width, this.height);
         // this.ctx.fillRect(this.x, this.y,this.height,this.width)
+    }
+
+    collisionDetect(obj){
+        const totalRadius = this.radius + obj.radius;
+        const totalDistance = Math.sqrt((this.x-obj.x)**2 + (this.y-obj.y)**2)
+
+        if (totalRadius>=totalDistance){
+            return true
+        }else{
+            return false
+        }
     }
 }

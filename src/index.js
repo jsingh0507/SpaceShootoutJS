@@ -58,6 +58,9 @@ function animate(){
     player.draw();
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
+        if (player.collisionDetect(arr[i])){
+            console.log("player hit");
+        }
     }
     removeObj()
     // console.log(arr.length)
@@ -66,8 +69,16 @@ function animate(){
             projectiles.splice(j, 1);
         }else{
             projectiles[j].update();
+            for (let k=0;k<arr.length;k++){
+                if (arr[k].collisionDetect(projectiles[j])){
+                    arr.splice(k,1);
+                    projectiles.splice(j,1);
+                }
+            }
         }
     }
+
+
     // debugger
     // console.log(`prokjectiles length after deleting: ${projectiles}`);
 }

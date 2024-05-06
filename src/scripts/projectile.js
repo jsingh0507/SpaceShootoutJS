@@ -50,6 +50,16 @@ class Projectile{
         this.shooting = false;
     }
 
-}
+    collisionDetect(obj){
+        const totalRadius = this.radius + obj.radius;
+        const totalDistance = Math.sqrt((this.x-obj.x)**2 + (this.y-obj.y)**2)
 
+        if (totalRadius>=totalDistance){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+}
 export default Projectile;
