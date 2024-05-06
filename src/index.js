@@ -4,7 +4,7 @@ import Asteroid from "./scripts/asteroid.js";
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
-const player = new Player(canvas,"./src/icons/ship1.png",350,canvas.height-60,80,60);
+const player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
 const arr = [];
 // debugger
 

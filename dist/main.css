@@ -8,8 +8,21 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: Arial, sans-serif; /* Set a default font */
+  color: white;
+  background-image: url(https://img.freepik.com/free-vector/coloured-lines-pattern-design_1197-46.jpg?t=st=1714969316~exp=1714972916~hmac=f689e84d59b51f87713a107b4dc5314e96ccd55b7eab4f108386f2420089e401&w=740);
+  background-size: 300px;
+  animation: movingBack 5s linear infinite;
 }
 
+@keyframes movingBack {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 300px 300px;
+  }
+}
 #game-canvas {
   background-color: black;
 }
@@ -21,9 +34,40 @@ body {
 
 #sidebar {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 200px;
   height: 600px;
-  flex-direction: column;
-  align-self: flex-start;
   background-color: darkgray;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+#sidebar h2 {
+  margin-top: 0;
+  font-size: 1.5rem; /* Increase heading size for emphasis */
+  color: white; /* Set text color to white */
+}
+
+#sidebar p {
+  margin: 0; /* Remove default margins */
+  color: #f0f0f0; /* Set paragraph text color */
+}
+
+#sidebar button {
+  margin-top: 10px;
+  padding: 5px 10px; /* Add padding to buttons */
+  font-size: 1rem; /* Set button text size */
+  border: none;
+  border-radius: 5px;
+  background-color: #4c4eaf; /* Green */
+  color: white;
+  cursor: pointer;
+  transition: background-color;
+}
+
+#sidebar button:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
