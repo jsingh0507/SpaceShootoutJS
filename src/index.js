@@ -8,7 +8,22 @@ import Projectile from "./scripts/projectile.js"
 const canvas = document.getElementById("game-canvas")
 const player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
 const arr = [];
-const projectiles = [new Projectile(canvas, player)];
+const projectiles = [];
+
+// Event listener for shooting projectiles
+document.addEventListener("keydown", (event) => {
+    if (event.key === ' ') {
+        projectiles.push(new Projectile(canvas, player.x + player.width / 2, player.y));
+    }
+});
+
+document.addEventListener("keyup", (event) => {
+    if (event.key === ' ') {
+        projectiles.forEach(projectile => {
+            projectile.stopShooting();
+        });
+    }
+});
 // debugger
 
 setTimeout(() => {
@@ -50,6 +65,7 @@ function animate(){
     }
 }
 animate()
+
 
 
 

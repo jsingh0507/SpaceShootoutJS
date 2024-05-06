@@ -16,7 +16,9 @@ body {
 }
 
 #game-canvas {
-  background-color: black;
+  background-image: url("/src/icons/bcv.png");
+  background-size: 100% auto;
+  animation: canvaMoves 4s linear infinite;
 }
 
 @keyframes movingBack {

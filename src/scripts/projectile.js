@@ -1,22 +1,14 @@
-import Player from "./player.js";
-
 class Projectile{
-    constructor(canvas, player){
+    constructor(canvas, x, y){
         // this.position = position;
         this.canvas = canvas;
-        this.player = player;
-        this.x = this.player.x+this.player.width/2 ;
-        this.y = this.player.y;
+        // this.player = player;
+        this.x = x;
+        this.y = y;
         this.velocity = 10
         this.radius = 5;
         this.ctx = this.canvas.getContext('2d');
-        this.keys = {};
-        this.shooting = false;
-        document.addEventListener("keydown", (event) => {
-            if (event.key === ' ' && !this.shooting) {
-                this.shooting = true;
-            }
-        });
+        this.shooting = true;
     }
     draw(){
         this.ctx.beginPath();
@@ -26,18 +18,36 @@ class Projectile{
         this.ctx.closePath();
     }
 
+    // update() {
+    //     this.draw();
+    //     if (this.shooting) {
+    //         this.y -= this.velocity;
+    //         if (this.y < -this.radius) {
+    //             this.y = this.canvas.height + this.radius;
+    //             this.shooting = false;
+    //         }
+    //     } else {
+    //         this.x = this.player.x + this.player.width / 2;
+    //         this.y = this.player.y;
+    //     }
+    // }
+
     update() {
         this.draw();
-        if (this.shooting) {
-            this.y -= this.velocity;
+        this.y -= this.velocity;
+        if (this.shooting){
             if (this.y < -this.radius) {
                 this.y = this.canvas.height + this.radius;
-                this.shooting = false;
+                const index = projectiles.indexOf(this);
+                if (index > -1) {
+                    projectiles.splice(index, 1);
+                }
             }
-        } else {
-            this.x = this.player.x + this.player.width / 2;
-            this.y = this.player.y;
         }
+    }
+
+    stopShooting() {
+        this.shooting = false;
     }
 
 }
