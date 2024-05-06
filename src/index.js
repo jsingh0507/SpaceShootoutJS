@@ -1,11 +1,14 @@
 import Player from "./scripts/player.js";
 import Alien from "./scripts/alien.js";
 import Asteroid from "./scripts/asteroid.js";
+import Projectile from "./scripts/projectile.js"
+
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
 const player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
 const arr = [];
+const projectiles = [new Projectile(canvas, player)];
 // debugger
 
 setTimeout(() => {
@@ -42,6 +45,9 @@ function animate(){
     }
     removeObj()
     console.log(arr.length)
+    for(let j=0; j<projectiles.length;j++){
+        projectiles[j].update();
+    }
 }
 animate()
 
