@@ -5,7 +5,7 @@ class MovableObjects {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = 3;
+        this.speed = 4;
         this.icon = new Image();
         this.icon.src = imageSrc;
         this.ctx = this.canvas.getContext('2d');

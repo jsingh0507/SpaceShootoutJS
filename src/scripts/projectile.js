@@ -38,10 +38,10 @@ class Projectile{
         if (this.shooting){
             if (this.y < -this.radius) {
                 this.y = this.canvas.height + this.radius;
-                const index = projectiles.indexOf(this);
-                if (index > -1) {
-                    projectiles.splice(index, 1);
-                }
+                // const index = projectiles.indexOf(this);
+                // if (index > -1) {
+                //     projectiles.splice(index, 1);
+                // }
             }
         }
     }

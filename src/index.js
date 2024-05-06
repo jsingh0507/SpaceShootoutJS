@@ -14,6 +14,7 @@ const projectiles = [];
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
         projectiles.push(new Projectile(canvas, player.x + player.width / 2, player.y));
+        // console.log(`prokjectiles length before deleting: ${projectiles.length}`);
     }
 });
 
@@ -59,10 +60,16 @@ function animate(){
         arr[i].draw();
     }
     removeObj()
-    console.log(arr.length)
+    // console.log(arr.length)
     for(let j=0; j<projectiles.length;j++){
-        projectiles[j].update();
+        if(projectiles[j].y + 5 <= 0){
+            projectiles.splice(j, 1);
+        }else{
+            projectiles[j].update();
+        }
     }
+    // debugger
+    // console.log(`prokjectiles length after deleting: ${projectiles}`);
 }
 animate()
 
