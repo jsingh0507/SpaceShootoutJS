@@ -59,15 +59,14 @@ function animate(){
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     for (let i = 0; i < explosion.length; i++) {
-        if (!explosion[i].update()) {
-            explosion.splice(i, 1); // Remove explosion if it's no longer active
-        }
+        explosion[i].update();
     }
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
         if (player.collisionDetect(arr[i])){
-            
-            explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 10, 'red'));
+            // for (let c = 0;c<10;c++){
+            //     explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 10, 'red'));
+            // }
             arr = [];
             player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
             player.draw();
@@ -85,8 +84,10 @@ function animate(){
             projectiles[j].update();
             for (let k=0;k<arr.length;k++){
                 if (arr[k].collisionDetect(projectiles[j])){
-                    explosion.push(new Explosion(canvas, arr[k].x, arr[k].y, 10, 'red'));
-                    console.log(explosion)
+                    for(let c=0;c<15;c++){
+                        explosion.push(new Explosion(canvas, arr[k].x, arr[k].y,'red'));
+                    }
+                    // console.log(explosion)
                     arr.splice(k,1);
                     projectiles.splice(j,1);
                     let currentScore = parseInt(score.textContent); // Get the current score as a number

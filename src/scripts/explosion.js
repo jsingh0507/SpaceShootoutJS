@@ -1,11 +1,12 @@
 class Explosion{
-    constructor(canvas, x, y, endRadius, color){
+    constructor(canvas, x, y, color){
         this.canvas = canvas;
         this.x = x;
         this.y = y;
-        this.velocity = 10
-        this.endRadius = endRadius;
-        this.radius = 5
+        this.velocity_x = (Math.random()-0.5)*2;
+        this.velocity_y = (Math.random()-0.5)*2;
+        this.radius = (Math.random()) * 3;
+
         this.ctx = this.canvas.getContext('2d');
         this.color = color
         this.explosion = true; 
@@ -19,13 +20,9 @@ class Explosion{
     }
 
     update() {
-        if (this.radius < this.endRadius) {
-            this.radius += 2; 
-        } else {
-            this.explosion = false; 
-        }
         this.draw();
-        return this.explosion;
+        this.x += this.velocity_x;
+        this.y += this.velocity_y;
     }
 }
 export default Explosion;
