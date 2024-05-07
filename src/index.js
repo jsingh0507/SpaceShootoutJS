@@ -4,6 +4,19 @@ import Asteroid from "./scripts/asteroid.js";
 import Projectile from "./scripts/projectile.js"
 import Explosion from "./scripts/explosion.js";
 
+let scores = JSON.parse(localStorage.getItem("high-scores"));
+if (scores==null){
+    scores = [["monkey", "0"],["john", "12"],["doe", "18"]];
+    localStorage.setItem("high-scores", JSON.stringify(scores))
+}
+
+let list = document.getElementById("high-scores");
+
+scores.forEach(score =>{
+    const listItem = document.createElement("li")
+    listItem.innerText = `${score[0]}: ${score[1]}`
+    list.appendChild(listItem);
+})
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
@@ -55,7 +68,6 @@ function removeObj(){
 }
 
 function animate(){
-    requestAnimationFrame(animate);
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     for (let i = 0; i < explosion.length; i++) {
@@ -77,7 +89,10 @@ function animate(){
             arr = [];
             player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
             player.draw();
-            if (parseInt(lives.textContent) > 0) {
+            if (parseInt(lives.textContent)==1){
+                lives.textContent = parseInt(lives.textContent) - 1;
+                return null;
+            }else {
                 lives.textContent = parseInt(lives.textContent) - 1;
             }
         }
@@ -104,7 +119,7 @@ function animate(){
             }
         }
     }
-
+    requestAnimationFrame(animate);
     // debugger
     // console.log(`prokjectiles length after deleting: ${projectiles}`);
 }
