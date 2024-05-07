@@ -4,7 +4,7 @@ class Projectile{
         this.x = x;
         this.y = y;
         this.velocity = 10
-        this.radius = 5;
+        this.radius = 3;
         this.ctx = this.canvas.getContext('2d');
         this.shooting = true;
     }

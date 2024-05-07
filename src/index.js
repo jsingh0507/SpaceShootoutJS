@@ -64,9 +64,10 @@ function animate(){
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
         if (player.collisionDetect(arr[i])){
-            // for (let c = 0;c<10;c++){
-            //     explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 10, 'red'));
-            // }
+            for (let c = 0;c<12;c++){
+                explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 'red'));
+                explosion.push(new Explosion(canvas, player.x+player.width/2, player.y+player.height/2, 'purple'));
+            }
             arr = [];
             player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
             player.draw();
@@ -84,8 +85,8 @@ function animate(){
             projectiles[j].update();
             for (let k=0;k<arr.length;k++){
                 if (arr[k].collisionDetect(projectiles[j])){
-                    for(let c=0;c<15;c++){
-                        explosion.push(new Explosion(canvas, arr[k].x, arr[k].y,'red'));
+                    for(let c=0;c<12;c++){
+                        explosion.push(new Explosion(canvas, arr[k].x, arr[k].y,'#C79306'));
                     }
                     // console.log(explosion)
                     arr.splice(k,1);
