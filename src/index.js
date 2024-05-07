@@ -7,7 +7,7 @@ import Explosion from "./scripts/explosion.js";
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
-let player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
+let player = new Player(canvas,"./src/icons/ship1.png",(canvas.width/2)-40,canvas.height-60,80,60);
 let arr = [];
 const projectiles = [];
 const score = document.getElementById("score");
@@ -59,12 +59,18 @@ function animate(){
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     for (let i = 0; i < explosion.length; i++) {
-        explosion[i].update();
+        if (explosion[i].opacity<=0){
+            setTimeout(() =>{
+                explosion.splice(i, 1);
+            },0)
+        }else{
+            explosion[i].update();
+        }
     }
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
         if (player.collisionDetect(arr[i])){
-            for (let c = 0;c<12;c++){
+            for (let c = 0;c<10;c++){
                 explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 'red'));
                 explosion.push(new Explosion(canvas, player.x+player.width/2, player.y+player.height/2, 'purple'));
             }
@@ -85,7 +91,7 @@ function animate(){
             projectiles[j].update();
             for (let k=0;k<arr.length;k++){
                 if (arr[k].collisionDetect(projectiles[j])){
-                    for(let c=0;c<12;c++){
+                    for(let c=0;c<10;c++){
                         explosion.push(new Explosion(canvas, arr[k].x, arr[k].y,'#C79306'));
                     }
                     // console.log(explosion)

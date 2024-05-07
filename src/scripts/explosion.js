@@ -9,20 +9,24 @@ class Explosion{
 
         this.ctx = this.canvas.getContext('2d');
         this.color = color
-        this.explosion = true; 
+        this.opacity = 1;
     }
     draw(){
+        this.ctx.save();
+        this.ctx.globalAlpha = this.opacity;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI *2);
         this.ctx.fillStyle = this.color;
         this.ctx.fill();
         this.ctx.closePath();
+        this.ctx.restore();
     }
 
     update() {
         this.draw();
         this.x += this.velocity_x;
         this.y += this.velocity_y;
+        this.opacity -=0.01;
     }
 }
 export default Explosion;

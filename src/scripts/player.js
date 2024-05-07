@@ -56,7 +56,7 @@ export default class Player {
             this.canCollide = false;
             setTimeout(() => {
                 this.canCollide = true;
-            }, 5000);
+            }, 3000);
             return true;
         }else{
             return false;
