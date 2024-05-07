@@ -19,7 +19,13 @@ class MovableObjects {
 
     draw() {
         this.updatePos();
-        this.ctx.drawImage(this.icon, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.icon, this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+        // drawing hit box
+        // this.ctx.beginPath();
+        // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI *2);
+        // this.ctx.fillStyle = 'red'
+        // this.ctx.fill();
+        // this.ctx.closePath();
     }
 
     collisionDetect(obj){

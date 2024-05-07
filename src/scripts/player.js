@@ -9,7 +9,7 @@ export default class Player {
         this.icon.src = shipSrc;
         this.ctx = this.canvas.getContext('2d');
         this.radius = 5;
-        
+        this.canCollide = true;
         // variables to keep track of the keyboard entry of the user:
         this.keys = {};
         // speed for the movements:
@@ -54,10 +54,14 @@ export default class Player {
         const totalRadius = this.radius + obj.radius;
         const totalDistance = Math.sqrt((this.x-obj.x)**2 + (this.y-obj.y)**2)
 
-        if (totalRadius>=totalDistance){
-            return true
+        if (totalRadius>=totalDistance && this.canCollide){
+            this.canCollide = false;
+            setTimeout(() => {
+                this.canCollide = true;
+            }, 2000);
+            return true;
         }else{
-            return false
+            return false;
         }
     }
 }
