@@ -60,11 +60,9 @@ function animate(){
     player.draw();
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
-        if (player.collisionDetect(arr[i]) && lives.textContent>0){
-            let currentLives = parseInt(lives.textContent); // Get the current lives as a number
-            if (currentLives > 0) {
-                currentLives -= 1; // Decrement the lives
-                lives.textContent = currentLives;
+        if (player.collisionDetect(arr[i])){
+            if (parseInt(lives.textContent) > 0) {
+                lives.textContent = parseInt(lives.textContent) - 1;
             }
         }
     }
@@ -86,7 +84,6 @@ function animate(){
             }
         }
     }
-
 
     // debugger
     // console.log(`prokjectiles length after deleting: ${projectiles}`);
