@@ -44,10 +44,8 @@ export default class Player {
 
     draw(){
         // debugger
-        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.updatePos();
         this.ctx.drawImage(this.icon, this.x, this.y, this.width, this.height);
-        // this.ctx.fillRect(this.x, this.y,this.height,this.width)
     }
 
     collisionDetect(obj){

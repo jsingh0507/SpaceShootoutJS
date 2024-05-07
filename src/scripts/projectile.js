@@ -1,8 +1,6 @@
 class Projectile{
     constructor(canvas, x, y){
-        // this.position = position;
         this.canvas = canvas;
-        // this.player = player;
         this.x = x;
         this.y = y;
         this.velocity = 10
@@ -18,30 +16,12 @@ class Projectile{
         this.ctx.closePath();
     }
 
-    // update() {
-    //     this.draw();
-    //     if (this.shooting) {
-    //         this.y -= this.velocity;
-    //         if (this.y < -this.radius) {
-    //             this.y = this.canvas.height + this.radius;
-    //             this.shooting = false;
-    //         }
-    //     } else {
-    //         this.x = this.player.x + this.player.width / 2;
-    //         this.y = this.player.y;
-    //     }
-    // }
-
     update() {
         this.draw();
         this.y -= this.velocity;
         if (this.shooting){
             if (this.y < -this.radius) {
                 this.y = this.canvas.height + this.radius;
-                // const index = projectiles.indexOf(this);
-                // if (index > -1) {
-                //     projectiles.splice(index, 1);
-                // }
             }
         }
     }

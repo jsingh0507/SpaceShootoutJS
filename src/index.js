@@ -2,6 +2,7 @@ import Player from "./scripts/player.js";
 import Alien from "./scripts/alien.js";
 import Asteroid from "./scripts/asteroid.js";
 import Projectile from "./scripts/projectile.js"
+import Explosion from "./scripts/explosion.js";
 
 
 // window.Player = Player;
@@ -11,6 +12,7 @@ const arr = [];
 const projectiles = [];
 const score = document.getElementById("score");
 const lives = document.getElementById("lives");
+const explosion = [];
 
 // Event listener for shooting projectiles
 document.addEventListener("keydown", (event) => {
@@ -55,9 +57,12 @@ function removeObj(){
 function animate(){
     requestAnimationFrame(animate);
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    // asteroid.draw();
-    // alien.draw();
     player.draw();
+    for (let i = 0; i < explosion.length; i++) {
+        if (!explosion[i].update()) {
+            explosion.splice(i, 1); // Remove explosion if it's no longer active
+        }
+    }
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
         if (player.collisionDetect(arr[i])){
@@ -75,6 +80,8 @@ function animate(){
             projectiles[j].update();
             for (let k=0;k<arr.length;k++){
                 if (arr[k].collisionDetect(projectiles[j])){
+                    explosion.push(new Explosion(canvas, arr[k].x, arr[k].y, 10, 'red'));
+                    console.log(explosion)
                     arr.splice(k,1);
                     projectiles.splice(j,1);
                     let currentScore = parseInt(score.textContent); // Get the current score as a number
