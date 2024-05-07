@@ -9,6 +9,8 @@ const canvas = document.getElementById("game-canvas")
 const player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
 const arr = [];
 const projectiles = [];
+const score = document.getElementById("score");
+const lives = document.getElementById("lives");
 
 // Event listener for shooting projectiles
 document.addEventListener("keydown", (event) => {
@@ -58,8 +60,12 @@ function animate(){
     player.draw();
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
-        if (player.collisionDetect(arr[i])){
-            console.log("player hit");
+        if (player.collisionDetect(arr[i]) && lives.textContent>0){
+            let currentLives = parseInt(lives.textContent); // Get the current lives as a number
+            if (currentLives > 0) {
+                currentLives -= 1; // Decrement the lives
+                lives.textContent = currentLives;
+            }
         }
     }
     removeObj()
@@ -73,6 +79,9 @@ function animate(){
                 if (arr[k].collisionDetect(projectiles[j])){
                     arr.splice(k,1);
                     projectiles.splice(j,1);
+                    let currentScore = parseInt(score.textContent); // Get the current score as a number
+                    currentScore += 1; // Increment the score
+                    score.textContent = currentScore; // Update the score on the page
                 }
             }
         }
