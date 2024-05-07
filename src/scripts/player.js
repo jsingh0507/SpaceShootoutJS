@@ -50,13 +50,13 @@ export default class Player {
 
     collisionDetect(obj){
         const totalRadius = this.radius + obj.radius;
-        const totalDistance = Math.sqrt((this.x-obj.x)**2 + (this.y-obj.y)**2)
+        const totalDistance = Math.sqrt( ((this.x-(obj.x-obj.width/2))**2) + ((this.y-(obj.y-obj.height/2)))**2)
 
         if (totalRadius>=totalDistance && this.canCollide){
             this.canCollide = false;
             setTimeout(() => {
                 this.canCollide = true;
-            }, 2000);
+            }, 5000);
             return true;
         }else{
             return false;

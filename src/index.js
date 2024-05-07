@@ -7,8 +7,8 @@ import Explosion from "./scripts/explosion.js";
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
-const player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
-const arr = [];
+let player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
+let arr = [];
 const projectiles = [];
 const score = document.getElementById("score");
 const lives = document.getElementById("lives");
@@ -66,6 +66,11 @@ function animate(){
     for (let i=0; i<arr.length; i++){
         arr[i].draw();
         if (player.collisionDetect(arr[i])){
+            
+            explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 10, 'red'));
+            arr = [];
+            player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
+            player.draw();
             if (parseInt(lives.textContent) > 0) {
                 lives.textContent = parseInt(lives.textContent) - 1;
             }
