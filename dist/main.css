@@ -83,3 +83,21 @@ body {
 #sidebar button:hover {
   background-color: #45a049; /* Darker green on hover */
 }
+
+#lives-section {
+  display: flex;
+  align-items: center;
+}
+
+#lives-section h3 {
+  margin-right: 5px;
+}
+
+#score-section {
+  display: flex;
+  align-items: center;
+}
+
+#score-section h3 {
+  margin-right: 5px;
+}
