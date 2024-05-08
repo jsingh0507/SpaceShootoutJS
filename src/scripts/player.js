@@ -8,7 +8,7 @@ export default class Player {
         this.icon = new Image();
         this.icon.src = shipSrc;
         this.ctx = this.canvas.getContext('2d');
-        this.radius = 5;
+        this.radius = 20;
         this.canCollide = true;
         // variables to keep track of the keyboard entry of the user:
         this.keys = {};
@@ -46,7 +46,12 @@ export default class Player {
     draw(){
         // debugger
         this.updatePos();
-        this.ctx.drawImage(this.icon, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.icon, this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+        // this.ctx.beginPath();
+        // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI *2);
+        // this.ctx.fillStyle = 'yellow'
+        // this.ctx.fill();
+        // this.ctx.closePath();
     }
 
     collisionDetect(obj){

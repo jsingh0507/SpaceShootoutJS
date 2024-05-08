@@ -26,8 +26,11 @@ const projectiles = [];
 const score = document.getElementById("score");
 const lives = document.getElementById("lives");
 const explosion = [];
+let usernameG="";
 
 let isGame = false;
+let isUpdated = false;
+
 
 canvas.style.display = "block"
 
@@ -56,14 +59,15 @@ function startGame(username) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     player.setUsername(username);
-    console.log(player.username)
+    usernameG = player.username;
+    // console.log(player.username)
     animate();
 }
 
 // Event listener for shooting projectiles
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
-        projectiles.push(new Projectile(canvas, player.x + player.width / 2, player.y));
+        projectiles.push(new Projectile(canvas, player.x, player.y));
         // console.log(`prokjectiles length before deleting: ${projectiles.length}`);
     }
 });
@@ -119,13 +123,33 @@ function animate(){
         if (player.collisionDetect(arr[i])){
             for (let c = 0;c<10;c++){
                 explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 'red'));
-                explosion.push(new Explosion(canvas, player.x+player.width/2, player.y+player.height/2, 'purple'));
+                explosion.push(new Explosion(canvas, player.x, player.y, 'purple'));
             }
             arr = [];
             player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
             player.draw();
             if (parseInt(lives.textContent)==1){
                 lives.textContent = parseInt(lives.textContent) - 1;
+                let currentScore = parseInt(score.textContent);
+                for (let i = 0; i < scores.length; i++) {
+                    if (currentScore > scores[i][1]) {
+                        scores[i][0]=usernameG;
+                        scores[i][1]=currentScore;
+                        isUpdated = true;
+                        break;
+                    }
+                }
+                if (isUpdated) {
+                    localStorage.setItem("high-scores", JSON.stringify(scores));
+                    let list = document.getElementById("high-scores");
+                    list.innerHTML = "";
+                    scores.forEach(score => {
+                        const listItem = document.createElement("li");
+                        console.log(score[0])
+                        listItem.innerText = `${score[0]}: ${score[1]}`;
+                        list.appendChild(listItem);
+                    });
+                }
                 return null;
             }else {
                 lives.textContent = parseInt(lives.textContent) - 1;
