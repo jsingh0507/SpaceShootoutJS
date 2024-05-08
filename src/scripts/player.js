@@ -14,6 +14,7 @@ export default class Player {
         this.keys = {};
         // speed for the movements:
         this.speed = 5;
+        this.username = "";
 
         //this event listener will work when pressed the key
         document.addEventListener("keydown", (event) => {
@@ -61,5 +62,9 @@ export default class Player {
         }else{
             return false;
         }
+    }
+
+    setUsername(username) {
+        this.username = username;
     }
 }

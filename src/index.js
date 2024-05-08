@@ -27,6 +27,39 @@ const score = document.getElementById("score");
 const lives = document.getElementById("lives");
 const explosion = [];
 
+let isGame = false;
+
+canvas.style.display = "block"
+
+// for the welcome message
+const ctx = canvas.getContext('2d');
+ctx.font = '30px Arial';
+ctx.fillStyle = 'white';
+ctx.textAlign = 'center';
+ctx.fillText('Welcome to Space Shootout!', canvas.width / 2, canvas.height / 2);
+
+// Event listener for the start button
+document.getElementById("start-button").addEventListener("click", () => {
+    if (!isGame) {
+        const username = prompt("Please enter your username:");
+        if (username) {
+            canvas.style.display = "block";
+            isGame = true;
+            startGame(username);
+        } else {
+            alert("Username is required to start the game.");
+        }
+    }
+});
+
+function startGame(username) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    player.setUsername(username);
+    console.log(player.username)
+    animate();
+}
+
 // Event listener for shooting projectiles
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
@@ -68,6 +101,8 @@ function removeObj(){
 }
 
 function animate(){
+    if (!isGame) return;
+
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     for (let i = 0; i < explosion.length; i++) {
