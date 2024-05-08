@@ -31,6 +31,24 @@ let usernameG="";
 let isGame = false;
 let isUpdated = false;
 
+const backgroundMusic = document.getElementById("background-music");
+backgroundMusic.volume = 0.1
+
+const toggleAudioButton = document.getElementById("audio-button");
+
+function toggleAudio() {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        backgroundMusic.volume = 0.1;
+        toggleAudioButton.textContent = "Audio: On";
+    } else {
+        backgroundMusic.pause();
+        toggleAudioButton.textContent = "Audio: Off";
+    }
+}
+
+// Add event listener to the toggle audio button
+toggleAudioButton.addEventListener("click", toggleAudio);
 
 canvas.style.display = "block"
 
@@ -43,6 +61,7 @@ ctx.fillText('Welcome to Space Shootout!', canvas.width / 2, canvas.height / 2);
 
 // Event listener for the start button
 document.getElementById("start-button").addEventListener("click", () => {
+    backgroundMusic.play();
     if (!isGame) {
         const username = prompt("Please enter your username:");
         if (username) {
@@ -54,6 +73,10 @@ document.getElementById("start-button").addEventListener("click", () => {
         }
     }
 });
+
+// document.getElementById("audio-button").addEventListener("click", () => {
+//     if (backgroundMusic)
+// });
 
 function startGame(username) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -67,6 +90,13 @@ function startGame(username) {
 // Event listener for shooting projectiles
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
+        const shootSound = document.getElementById("shoot-sound");
+        shootSound.volume = 0.6;
+        if (toggleAudioButton.textContent == "Audio: Off") {
+            shootSound.pause();
+        } else{
+            shootSound.play();
+        }
         projectiles.push(new Projectile(canvas, player.x, player.y));
         // console.log(`prokjectiles length before deleting: ${projectiles.length}`);
     }
