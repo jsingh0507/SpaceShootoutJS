@@ -17,7 +17,7 @@ body {
 #game-canvas {
     // background-color: black;
     // background-image: url(https://i.pinimg.com/736x/66/13/a2/6613a2456140765db7faed1ed4da4435.jpg);
-    background-image: url('/src/icons/bcv.png');
+    background-image: url('../src/icons/bcv.png');
     // background-image: url(https://img.freepik.com/free-vector/coloured-lines-pattern-design_1197-46.jpg?t=st=1714969316~exp=1714972916~hmac=f689e84d59b51f87713a107b4dc5314e96ccd55b7eab4f108386f2420089e401&w=740);
     background-size: 100% auto;
     animation: canvaMoves 4s linear infinite;
