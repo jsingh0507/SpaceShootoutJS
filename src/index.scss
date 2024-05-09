@@ -60,9 +60,14 @@ body {
     font-size: 1.5rem; 
     color: white; 
 }
+
+#sidebar h3 {
+    margin-top: 1px;
+}
   
 #sidebar p {
-    margin: 0; 
+    // margin: 0; 
+    margin-top: 1px;
     color: #f0f0f0; 
 }
   

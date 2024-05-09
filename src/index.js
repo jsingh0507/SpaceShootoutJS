@@ -20,7 +20,7 @@ scores.forEach(score =>{
 
 // window.Player = Player;
 const canvas = document.getElementById("game-canvas")
-let player = new Player(canvas,"./src/icons/ship1.png",(canvas.width/2)-40,canvas.height-60,80,60);
+let player = new Player(canvas,"./src/icons/ship1.png",(canvas.width/2),canvas.height-60,80,60);
 let arr = [];
 const projectiles = [];
 const score = document.getElementById("score");
