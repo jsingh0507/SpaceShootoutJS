@@ -3,6 +3,8 @@
 
 JavaScript Space Shootout is an action-packed gaming project built entirely in JavaScript, Take a deep dive into the space where you take control of your spaceship to start shooting and dodging the obstacles and enemies that you encounter.
 
+Game link:  [SpaceShootOut](https://jsingh0507.github.io/SpaceShootoutJS/)
+
 ## Functionality & MVPs
 In JavaScript Space Shootout, users will be able to:
 - Ship movement and controls:
@@ -64,18 +66,7 @@ Dillinger uses a number of open source projects to work properly:
 - Thursday Morning:
     1) Deploy.
 
-# Checklist
-## Live Project
-- [ ] Includes links to your portfolio website, Github, and LinkedIn.
-- [ ] Landing page/modal with obvious, clear instructions.
-- [ ] Interactivity of some kind.
-- [ ] If it has music, the option to mute or stop it.
+## Code snippet
+![Getting Started](./codesnipet.png)
 
-## Production README
-- [ ] Link to live version.
-- [ ] Instructions on how to play/interact with the project.
-- [ ] List of technologies / libraries / APIs used.
-- [ ] Technical implementation details with (good-looking) code snippets.
-- [ ] To-dos / future features.
-- [ ] No .DS_Store files / debuggers / console.logs.
-- [ ] Organized file structure, with /src and /dist directories.
+The above snippet is the code that includes the logic to update the score and keep track of the high score. This was one of the part were it took most of the time to come up with the logic to implement it. After doin some research I was able to implement the local storage to keep track and save the scores in the local browser for each player.
