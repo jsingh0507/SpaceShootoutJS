@@ -67,6 +67,7 @@ document.getElementById("start-button").addEventListener("click", () => {
             canvas.style.display = "block";
             isGame = true;
             startGame(username);
+            document.getElementById("start-button").textContent = "Restart";
         } else {
             alert("Username is required to start the game.");
         }
@@ -83,7 +84,7 @@ function startGame(username) {
     animate();
 }
 
-// Event listener for shooting projectiles
+// Event listener for shooting projectiles when key is pressed and released
 document.addEventListener("keydown", (event) => {
     if (event.key === ' ') {
         const shootSound = document.getElementById("shoot-sound");
@@ -97,7 +98,6 @@ document.addEventListener("keydown", (event) => {
         // console.log(`prokjectiles length before deleting: ${projectiles.length}`);
     }
 });
-
 document.addEventListener("keyup", (event) => {
     if (event.key === ' ') {
         projectiles.forEach(projectile => {
@@ -105,13 +105,13 @@ document.addEventListener("keyup", (event) => {
         });
     }
 });
-// debugger
 
+
+//these block spawn enemies randmoly 
 setTimeout(() => {
     const randomDelay = Math.random()*5000;
     setTimeout(spawn,randomDelay);
 }, Math.random()*5000);
-
 function spawn(){
     const randomObj = Math.random();
     if (randomObj < 0.5){
@@ -122,6 +122,8 @@ function spawn(){
     setTimeout(spawn, Math.random() * 5000);
 }
 
+
+//removes enemies from the screen and memory
 function removeObj(){
     for (let i=0; i<arr.length; i++){
         if (arr[i].y > canvas.height){
@@ -130,6 +132,7 @@ function removeObj(){
     }
 }
 
+//animation function where the actual logic is imlemented
 function animate(){
     if (!isGame) return;
 
