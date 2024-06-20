@@ -32,12 +32,10 @@ let usernameG="";     // this to hold the username of the player
 let isGame = false;   //to track if game is running 
 let isUpdated = false; //to track if high score needs to be updated
 
-
+//this block is for the backround music 
 const backgroundMusic = document.getElementById("background-music");
 backgroundMusic.volume = 0.1
-
-const toggleAudioButton = document.getElementById("audio-button");
-
+const toggleAudioButton = document.getElementById("audio-button");  //seta up a button to turn on/off the audio
 function toggleAudio() {
     if (backgroundMusic.paused) {
         backgroundMusic.play();
@@ -48,13 +46,12 @@ function toggleAudio() {
         toggleAudioButton.textContent = "Audio: Off";
     }
 }
-
 // Add event listener to the toggle audio button
 toggleAudioButton.addEventListener("click", toggleAudio);
 
-canvas.style.display = "block"
 
 // for the welcome message
+canvas.style.display = "block"
 const ctx = canvas.getContext('2d');
 ctx.font = '30px Arial';
 ctx.fillStyle = 'white';
@@ -76,10 +73,7 @@ document.getElementById("start-button").addEventListener("click", () => {
     }
 });
 
-// document.getElementById("audio-button").addEventListener("click", () => {
-//     if (backgroundMusic)
-// });
-
+//start game function
 function startGame(username) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
