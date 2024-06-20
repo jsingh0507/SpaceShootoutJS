@@ -1,35 +1,37 @@
+//import neccessary classes for the game (various component of the games)
 import Player from "./scripts/player.js";
 import Alien from "./scripts/alien.js";
 import Asteroid from "./scripts/asteroid.js";
 import Projectile from "./scripts/projectile.js"
 import Explosion from "./scripts/explosion.js";
 
+//this code block try to retrive high scores if found nothing it initialize a default set of 3 high scores and saves to localStorage
 let scores = JSON.parse(localStorage.getItem("high-scores"));
 if (scores==null){
     scores = [["monkey", "0"],["john", "12"],["doe", "18"]];
     localStorage.setItem("high-scores", JSON.stringify(scores))
 }
 
+//displays the high scores on the page. it retrives the html element by it id = high-scores, the create a <li> and append them to high scores
 let list = document.getElementById("high-scores");
-
 scores.forEach(score =>{
     const listItem = document.createElement("li")
     listItem.innerText = `${score[0]}: ${score[1]}`
     list.appendChild(listItem);
 })
 
-// window.Player = Player;
+//initalize the game canvas, player, an other game related variables
 const canvas = document.getElementById("game-canvas")
 let player = new Player(canvas,"./src/icons/ship1.png",(canvas.width/2),canvas.height-60,80,60);
-let arr = [];
-const projectiles = [];
-const score = document.getElementById("score");
-const lives = document.getElementById("lives");
-const explosion = [];
-let usernameG="";
+let arr = [];   //this array hold the objects like asteroids and aliens
+const projectiles = []; //this array holds the shots (projectile) of the player
+const score = document.getElementById("score"); //retrieve the score element from html bi its id
+const lives = document.getElementById("lives"); //same here but for lives
+const explosion = [];  // this array holds the explosion effects(the little projectiles effects on collision)
+let usernameG="";     // this to hold the username of the player
+let isGame = false;   //to track if game is running 
+let isUpdated = false; //to track if high score needs to be updated
 
-let isGame = false;
-let isUpdated = false;
 
 const backgroundMusic = document.getElementById("background-music");
 backgroundMusic.volume = 0.1
