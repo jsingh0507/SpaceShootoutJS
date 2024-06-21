@@ -214,8 +214,10 @@ function animate() {
                     });
                 }
                 // Display the game over message.
-                isGame = false;  // Stop the game.
-                displayGameOver();
+                // displayGameOver();
+                // isGame = false;  // Stop the game.
+                // lives.textContent = '3';
+                restartGame();
                 return;
             } else {
                 lives.textContent = parseInt(lives.textContent) - 1;
