@@ -47,7 +47,11 @@ function toggleAudio() {
     }
 }
 // Add event listener to the toggle audio button
-toggleAudioButton.addEventListener("click", toggleAudio);
+// toggleAudioButton.addEventListener("click", toggleAudio);
+toggleAudioButton.addEventListener("click", () => {
+    toggleAudio();
+    toggleAudioButton.blur();  // Remove focus from the button after clicking.
+});
 
 
 // for the welcome message
@@ -57,6 +61,14 @@ ctx.font = '30px Arial';
 ctx.fillStyle = 'white';
 ctx.textAlign = 'center';
 ctx.fillText('Welcome to Space Shootout!', canvas.width / 2, canvas.height / 2);
+
+function displayGameOver() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '30px Arial';
+    ctx.fillStyle = 'red';
+    ctx.textAlign = 'center';
+    ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2);
+}
 
 // Event listener for the start button
 document.getElementById("start-button").addEventListener("click", () => {
@@ -71,8 +83,31 @@ document.getElementById("start-button").addEventListener("click", () => {
         } else {
             alert("Username is required to start the game.");
         }
+    } else {
+        restartGame();
     }
+    document.getElementById("start-button").blur();
 });
+
+
+function restartGame() {
+    isGame = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    player = new Player(canvas, "./src/icons/ship1.png", (canvas.width / 2), canvas.height - 60, 80, 60);
+    score.textContent = '0';
+    lives.textContent = '3';
+    arr = [];
+    projectiles = [];
+    explosion.length = 0;
+    const username = prompt("Please enter your username:");
+    if (username) {
+        isGame = true;
+        startGame(username);
+    } else {
+        alert("Username is required to restart the game.");
+    }
+}
+
 
 //start game function
 function startGame(username) {
@@ -132,38 +167,38 @@ function removeObj(){
     }
 }
 
-//animation function where the actual logic is imlemented
-function animate(){
+// Animation function where the actual logic is implemented.
+function animate() {
     if (!isGame) return;
 
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     for (let i = 0; i < explosion.length; i++) {
-        if (explosion[i].opacity<=0){
-            setTimeout(() =>{
+        if (explosion[i].opacity <= 0) {
+            setTimeout(() => {
                 explosion.splice(i, 1);
-            },0)
-        }else{
+            }, 0);
+        } else {
             explosion[i].update();
         }
     }
-    for (let i=0; i<arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         arr[i].draw();
-        if (player.collisionDetect(arr[i])){
-            for (let c = 0;c<10;c++){
+        if (player.collisionDetect(arr[i])) {
+            for (let c = 0; c < 10; c++) {
                 explosion.push(new Explosion(canvas, arr[i].x, arr[i].y, 'red'));
                 explosion.push(new Explosion(canvas, player.x, player.y, 'purple'));
             }
             arr = [];
-            player = new Player(canvas,"./src/icons/ship1.png",canvas.width/2,canvas.height-60,80,60);
+            player = new Player(canvas, "./src/icons/ship1.png", canvas.width / 2, canvas.height - 60, 80, 60);
             player.draw();
-            if (parseInt(lives.textContent)==1){
-                lives.textContent = parseInt(lives.textContent) - 1;
+            if (parseInt(lives.textContent) == 1) {
+                lives.textContent = '0';
                 let currentScore = parseInt(score.textContent);
                 for (let i = 0; i < scores.length; i++) {
                     if (currentScore > scores[i][1]) {
-                        scores[i][0]=usernameG;
-                        scores[i][1]=currentScore;
+                        scores[i][0] = usernameG;
+                        scores[i][1] = currentScore;
                         isUpdated = true;
                         break;
                     }
@@ -174,46 +209,42 @@ function animate(){
                     list.innerHTML = "";
                     scores.forEach(score => {
                         const listItem = document.createElement("li");
-                        console.log(score[0])
                         listItem.innerText = `${score[0]}: ${score[1]}`;
                         list.appendChild(listItem);
                     });
                 }
-                return null;
-            }else {
+                // Display the game over message.
+                isGame = false;  // Stop the game.
+                displayGameOver();
+                return;
+            } else {
                 lives.textContent = parseInt(lives.textContent) - 1;
             }
         }
     }
-    removeObj()
-    // console.log(arr.length)
-    for(let j=0; j<projectiles.length;j++){
-        if(projectiles[j].y + 5 <= 0){
+    removeObj();
+    for (let j = 0; j < projectiles.length; j++) {
+        if (projectiles[j].y + 5 <= 0) {
             projectiles.splice(j, 1);
-        }else{
+        } else {
             projectiles[j].update();
-            for (let k=0;k<arr.length;k++){
-                if (arr[k].collisionDetect(projectiles[j])){
-                    for(let c=0;c<10;c++){
-                        explosion.push(new Explosion(canvas, arr[k].x, arr[k].y,'#C79306'));
+            for (let k = 0; k < arr.length; k++) {
+                if (arr[k].collisionDetect(projectiles[j])) {
+                    for (let c = 0; c < 10; c++) {
+                        explosion.push(new Explosion(canvas, arr[k].x, arr[k].y, '#C79306'));
                     }
-                    // console.log(explosion)
-                    arr.splice(k,1);
-                    projectiles.splice(j,1);
+                    arr.splice(k, 1);
+                    projectiles.splice(j, 1);
                     let currentScore = parseInt(score.textContent); // Get the current score as a number
                     currentScore += 1; // Increment the score
                     score.textContent = currentScore; // Update the score on the page
+                    break; // Exit the inner loop to avoid further collisions
                 }
             }
         }
     }
     requestAnimationFrame(animate);
-    // debugger
-    // console.log(`prokjectiles length after deleting: ${projectiles}`);
 }
-animate()
 
-
-
-
-
+// Initial call to start the animation loop
+animate();
